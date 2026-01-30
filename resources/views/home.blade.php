@@ -1,1 +1,5 @@
-Page d'accueil
+@extends('layouts.app')
+
+@section('content')
+    
+@endsection
