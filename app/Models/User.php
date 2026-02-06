@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $appends = ['avatar'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,5 +46,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function getAvatarAttribute($value)
+    {
+        return "https://ui-avatars.com/api/?name=" . str_replace(" ", "+", $this->name);
     }
 }

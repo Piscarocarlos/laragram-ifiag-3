@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function show_login_form()
     {
-        return "Je suis la page login";
+        return view('auth.login');
     }
 
     public function show_register_form()
@@ -42,11 +42,11 @@ class AuthController extends Controller
         $user->username = $request->username;
         $user->name = $request->first_name . " " . $request->last_name;
         $user->password = Hash::make($request->password); // bcrypt
-        
+
         $user->save();
 
         // send welcome mail ou bien mail de validation
-        Mail::to($user)->send(new WelcomeMail());
+        Mail::to($user)->send(new WelcomeMail($user));
         // connecte l'utilisateur
         Auth::login($user);
 
